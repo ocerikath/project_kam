@@ -1,0 +1,542 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css">
+
+{% endblock %}
+
+{% block content %}
+<!-- секция 1 "вступление" -->
+<section class="heading">
+    <div class="heading__bg-container"></div>
+    <div class="heading__grid-container">
+      <div class="heading__block-first fade-up visible">
+        <div class="heading__block-title fade-up visible">
+          <h1 class="heading__title-first fade-up">
+            Доставка<br> нерудных материалов<br />
+            <span class="heading__span fade-up">БЫСТРО</span><br />
+            и<br />
+            <span class="heading__span fade-up">БЕЗ ЛИШНИХ ЗАБОТ</span>
+          </h1>
+          <p class="heading__text fade-up">Доставка по региону. Гарантия качества</p>
+        </div>
+        <a href="#lead-section" class="heading__link fade-up" id="scrollToLead">Оставить заявку</a>
+      </div>
+    </div>
+</section>
+
+<!-- Секция 2 "Наши услуги" -->
+<section class="services-slider fade-up">
+  <div class="swiper fade-up">
+    <div class="swiper-wrapper">
+
+      <!-- Слайд 1 -->
+      <div class="swiper-slide">
+        <picture>
+          <source srcset="{% static 'images/site_images/dostavka.webp' %}" type="image/webp">
+          <img class="slide-bg"
+               src="{% static 'images/site_images/dostavka.png' %}"
+               alt="Доставка"
+               loading="lazy">
+        </picture>
+        <div class="slide-overlay1"></div>
+        <div class="slide-content">
+          <h2>Доставка</h2>
+          <p>Щебень, песок и другие нерудные материалы</p>
+          <a href="#" class="btn">Заказать услугу</a>
+        </div>
+      </div>
+
+      <!-- Слайд 2 -->
+      <div class="swiper-slide">
+        <picture>
+          <source srcset="{% static 'images/site_images/dorozniye_raboti.webp' %}" type="image/webp">
+          <img class="slide-bg"
+               src="{% static 'images/site_images/dorozniye_raboti.png' %}"
+               alt="Дорожные работы"
+               loading="lazy">
+        </picture>
+        <div class="slide-overlay1"></div>
+        <div class="slide-content">
+          <h2>Дорожные работы</h2>
+          <p>Строительство и укладка дорог</p>
+          <a href="#" class="btn">Заказать услугу</a>
+        </div>
+      </div>
+
+      <!-- Слайд 3 -->
+      <div class="swiper-slide">
+        <picture>
+          <source srcset="{% static 'images/site_images/vyvoz_musora.webp' %}" type="image/webp">
+          <img class="slide-bg"
+               src="{% static 'images/site_images/vyvoz_musora.png' %}"
+               alt="Вывоз мусора"
+               loading="lazy">
+        </picture>
+        <div class="slide-overlay1"></div>
+        <div class="slide-content">
+          <h2>Вывоз мусора</h2>
+          <p>Быстро и удобно</p>
+          <a href="#" class="btn">Заказать услугу</a>
+        </div>
+      </div>
+
+      <!-- Слайд 4 -->
+      <div class="swiper-slide">
+        <picture>
+          <source srcset="{% static 'images/site_images/vivoz_snega.webp' %}" type="image/webp">
+          <img class="slide-bg"
+               src="{% static 'images/site_images/vivoz_snega.png' %}"
+               alt="Вывоз снега"
+               loading="lazy">
+        </picture>
+        <div class="slide-overlay1"></div>
+        <div class="slide-content">
+          <h2>Вывоз снега</h2>
+          <p>Зимой — без проблем</p>
+          <a href="#" class="btn">Заказать услугу</a>
+        </div>
+      </div>
+
+      <!-- Слайд 5 -->
+      <div class="swiper-slide">
+        <picture>
+          <source srcset="{% static 'images/site_images/arenda_texniki.webp' %}" type="image/webp">
+          <img class="slide-bg"
+               src="{% static 'images/site_images/arenda_texniki.png' %}"
+               alt="Аренда техники"
+               loading="lazy">
+        </picture>
+        <div class="slide-overlay1"></div>
+        <div class="slide-content">
+          <h2>Аренда техники</h2>
+          <p>Экскаваторы и другая спецтехника</p>
+          <a href="#" class="btn">Заказать услугу</a>
+        </div>
+      </div>
+
+      <!-- Слайд 6 -->
+      <div class="swiper-slide">
+        <picture>
+          <source srcset="{% static 'images/site_images/zemlyanie_raboti.webp' %}" type="image/webp">
+          <img class="slide-bg"
+               src="{% static 'images/site_images/zemlyanie_raboti.png' %}"
+               alt="Земельные работы"
+               loading="lazy">
+        </picture>
+        <div class="slide-overlay1"></div>
+        <div class="slide-content">
+          <h2>Земляные работы</h2>
+          <p>Рытьё котлованов и другие землеройные работы</p>
+          <a href="#" class="btn">Заказать услугу</a>
+        </div>
+      </div>
+
+      <!-- Слайд 7 -->
+      <div class="swiper-slide">
+        <picture>
+          <source srcset="{% static 'images/site_images/individual.webp' %}" type="image/webp">
+          <img class="slide-bg"
+               src="{% static 'images/site_images/individual.png' %}"
+               alt="Индивидуальные заказы"
+               loading="lazy">
+        </picture>
+        <div class="slide-overlay1"></div>
+        <div class="slide-content">
+          <h2>Индивидуальные заказы</h2>
+          <p>Решения под ваши задачи</p>
+          <a href="#" class="btn">Заказать услугу</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Индикаторы -->
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+
+
+<!-- Секция 3 "Почему мы?" -->
+<section class="why-us2">
+  <div class="background-whyus2"></div>
+  <div class="slides-whyus2">
+    <div class="slide-whyus2">
+      <div class="slide-whyus2-content">
+        <div class="icon-whyus2">🚚</div>
+        <h2>Быстрая доставка</h2>
+        <p>Доставляем продукцию в течение 1 дня.</p>
+      </div>
+    </div>
+    <div class="slide-whyus2">
+      <div class="slide-whyus2-content">
+        <div class="icon-whyus2">✅</div>
+        <h2>Гарантия качества</h2>
+        <p>Даем гарантию на всю продукцию.</p>
+      </div>
+    </div>
+    <div class="slide-whyus2">
+      <div class="slide-whyus2-content">
+        <div class="icon-whyus2">📅</div>
+        <h2>Работаем без выходных</h2>
+        <p>7 дней в неделю без перерывов.</p>
+      </div>
+    </div>
+    <div class="slide-whyus2">
+      <div class="slide-whyus2-content">
+        <div class="icon-whyus2">🚛</div>
+        <h2>Собственный автопарк</h2>
+        <p>Более 50 машин в распоряжении.</p>
+      </div>
+    </div>
+    <div class="slide-whyus2">
+      <div class="slide-whyus2-content">
+        <div class="icon-whyus2">💰</div>
+        <h2>Приятные цены</h2>
+        <p>Конкурентные расценки без потери качества.</p>
+      </div>
+    </div>
+    <div class="slide-whyus2">
+      <div class="slide-whyus2-content">
+        <div class="icon-whyus2">🛠</div>
+        <h2>Полный спектр услуг</h2>
+        <p>Комплексное решение задач под ключ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- После секции .why-us2 автоматически добавится статическая сетка -->
+
+{% load static %}
+<!-- Секция 4 "Каталог" -->
+<section class="catalog-section fade-up">
+  <div class="catalog-header fade-up">
+    <h2 class="catalog-title fade-up">Наш каталог</h2>
+    <a href="#" class="catalog-link fade-up">Все товары →</a>
+  </div>
+
+  <div class="catalog-categories fade-up">
+    {# динамические кнопки по категориям, как у тебя, с тем же data-атрибутом #}
+    {% for cat in categories %}
+      <button data-category="{{ cat.name }}">{{ cat.name }}</button>
+    {% endfor %}
+  </div>
+
+  <div class="catalog-slider fade-up">
+    {% for product in products %}
+      <div class="slide" data-category="{{ product.category.name }}">
+        <div class="slide-image">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          {% else %}
+            <img src="{% static 'images/site_images/no-image.jpg' %}" alt="Нет изображения">
+          {% endif %}
+        </div>
+        <div class="slide-footer">
+          <span class="card-title">{{ product.name }}</span>
+          <span class="card-price">от {{ product.price }}₽</span>
+        </div>
+        <a href="#" class="slide-btn">Заказать</a>
+      </div>
+    {% endfor %}
+  </div>
+  
+</section>
+
+<!-- Секция 4 "область нашей работы" -->
+<section class="map-section fade-up">
+  <div class="map-text">
+    <h2>Область нашей работы</h2>
+    <p>Работаем в Пушкинском районе</p>
+  </div>
+  <div id="map" style="width: 100%; height: 500px;"></div>
+  <p style="font-size:14px; color:#555; text-align:center; margin-top:8px;">
+    *Работа в области, не входящей в выделенную зону, обсуждается индивидуально
+  </p>
+</section>
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=3fbcce04-81c5-4994-b274-c3d5a5c5df58&lang=ru_RU" type="text/javascript"></script>
+<script>
+ymaps.ready(init);
+
+function init() {
+    const map = new ymaps.Map("map", {
+        center: [55.99, 38.1], // временно, потом auto-fit
+        zoom: 9,
+        controls: ['zoomControl']
+    });
+
+    // координаты твоей области (LineString → Polygon)
+    const coords = [
+      [56.374682584934675, 38.11583145743336],
+      [56.374960356073046, 38.11338807378084],
+      [56.36613745806716, 38.18844755411018],
+      [56.33922372799702, 38.26004155608521],
+      [56.31536603655877, 38.30805697580544],
+      [56.284333578697186, 38.39708077072001],
+      [56.225605031311545, 38.49851828888717],
+      [56.15649668286713, 38.56038369686598],
+      [56.11618797266618, 38.608352754728514],
+      [56.10463869550645, 38.58785281721072],
+      [56.050756075047474, 38.547682076763834],
+      [56.04217322963902, 38.47608314184987],
+      [56.05497937076075, 38.442361877481375],
+      [56.04229123639982, 38.38532034633468],
+      [56.01330355305899, 38.354258619428066],
+      [55.98833699479596, 38.351877299352935],
+      [55.95610061130415, 38.24401554615906],
+      [55.92628583701028, 38.203982550342204],
+      [55.92882651738424, 38.13762339994631],
+      [55.906223290860964, 38.09858935186119],
+      [55.895060031706606, 38.01885107836213],
+      [55.86642962620866, 37.989170322416925],
+      [55.846176683770494, 37.96349471845102],
+      [55.83364613324963, 37.9419765723278],
+      [55.814282034861236, 37.83458153986379],
+      [55.82926115302371, 37.83299063986874],
+      [55.86002295042593, 37.770999690539384],
+      [55.88016753856732, 37.729399232932764],
+      [55.88179356837449, 37.72656021260994],
+      [55.894308281564946, 37.673558196211104],
+      [55.93171303774591, 37.659393850621456],
+      [55.954359929423276, 37.65520286916279],
+      [55.97242654618023, 37.68266791881456],
+      [55.970323388488424, 37.752200451645734],
+      [55.98336968088148, 37.76753188824091],
+      [56.01177910565377, 37.770895525446406],
+      [56.010339836767116, 37.79779664439303],
+      [56.0234822160366, 37.81053663361237],
+      [56.05084917346139, 37.76947348655435],
+      [56.08785836243803, 37.74693226941986],
+      [56.111386779790365, 37.78036679135619],
+      [56.146367228864506, 37.81118841515212],
+      [56.24594528681948, 37.839984966871384],
+      [56.298575086707785, 37.86703372414604],
+      [56.355323672532535, 37.97170184444792],
+      [56.373649179654365, 38.110611714860795],
+      [56.374890555217064, 38.113070782151425]
+    ];
+
+    const polygon = new ymaps.Polygon([coords], {}, {
+      fillColor: 'rgba(212, 205,	191, 0.3)',
+      strokeColor: '#8c7865',
+      strokeWidth: 2
+    });
+
+    map.geoObjects.add(polygon);
+
+    // автоцентрирование по области
+    map.setBounds(polygon.geometry.getBounds(), { checkZoomRange: true, zoomMargin: 20 });
+}
+</script>
+
+<!-- Секция 5 "Заявка / форма" -->
+<section class="form-bg fade-up" id="lead-section">
+
+  <!-- Табличка-за-формой -->
+  <div class="form-background fade-up"></div>
+
+  <form id="leadForm" class="fade-up" method="post" novalidate>
+    {% csrf_token %}
+    <h2 id="form-lead">Оставить заявку</h2>
+    <!-- Поле имя -->
+    <div class="input-container fade-up">
+      <img class="icon" src="{% static 'images/icons/name.png' %}" alt="icon">
+      <input type="text" name="full_name" id="id_full_name" placeholder="Ваше имя" value="{{ form.full_name.value|default_if_none:'' }}">
+      <div class="field-error"></div>
+    </div>
+
+    <!-- Поле телефон -->
+    <div class="input-container">
+      <img class="icon" src="{% static 'images/icons/phone.png' %}" alt="icon">
+      <input type="text" name="phone" id="id_phone" placeholder="Телефон" value="{{ form.phone.value|default_if_none:'' }}">
+      <div class="field-error"></div>
+    </div>
+
+    <!-- Поле email -->
+    <div class="input-container">
+      <img class="icon" src="{% static 'images/icons/mail.png' %}" alt="icon">
+      <input type="email" name="email" id="id_email" placeholder="Email" value="{{ form.email.value|default_if_none:'' }}">
+      <div class="field-error"></div>
+    </div>
+
+    <!-- Поле комментарий -->
+    <div class="input-container">
+      <img class="icon" src="{% static 'images/icons/comment.png' %}" alt="icon">
+      <textarea name="comment" id="id_comment" placeholder="Комментарий"> {{ form.comment.value|default_if_none:'' }}</textarea>
+      <div class="field-error"></div>
+    </div>
+
+    <!-- Чекбокс согласия -->
+    <div class="checkbox-container">
+      <label class="custom-checkbox">
+        <input type="checkbox" id="consent">
+        <span class="checkmark"></span>
+        <span class="checkbox-text">
+          Согласен на <a href="#" target="_blank">обработку персональных данных</a>
+        </span>
+      </label>
+      <div class="field-error"></div>
+    </div>
+
+    <!-- Кнопка отправки -->
+    <button class="fade-up" type="submit" id="submitBtn" disabled>Отправить заявку</button>
+  </form>
+</section>
+
+<!-- Модальное окно -->
+<div id="modal">
+  <p id="modalMessage"></p>
+  <button id="modalClose">Закрыть</button>
+</div>
+
+<section class="contact-info-area fade-up">
+  <div class="contact-info-text fade-up">
+    <ul>
+      <li><p>Или свяжитесь с нами!</p></li>
+      <li><a href="tel:+79001234567" class="phone-number-info">+7 (900) 123-45-67</a></li>
+      <li><a href="mailto:pesokperviy@gmail.com" class="email-adress-info">pesokperviy@gmail.com</a> </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Секция 6 "примеры наших работ"-->
+<section class="works-section fade-up">
+  <h2 class="works-title fade-up">Примеры наших работ</h2>
+
+  <div class="works-slider fade-up">
+    <div class="works-track fade-up">
+
+      <!-- Слайды (все одинаковые) -->
+      <div class="works-slide">
+        <div class="works-big"><img src="{% static 'images/site_images/dorozniye_raboti.png' %}" alt=""></div>
+        <div class="works-row">
+          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
+        </div>
+      </div>
+
+      <div class="works-slide">
+        <div class="works-big"><img src="{% static 'images/site_images/individual.png' %}" alt=""></div>
+        <div class="works-row">
+          <div class="works-small"><img src="{% static 'images/site_images/dostavka.png' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/vivoz_snega.png' %}" alt=""></div>
+        </div>
+      </div>
+
+      <div class="works-slide">
+        <div class="works-big"><img src="{% static 'images/site_images/zemlyanie_raboti.png' %}" alt=""></div>
+        <div class="works-row">
+          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
+        </div>
+      </div>
+
+      <!-- Дубликаты для бесконечной анимации -->
+      <div class="works-slide">
+        <div class="works-big"><img src="{% static 'images/site_images/dorozniye_raboti.png' %}" alt=""></div>
+        <div class="works-row">
+          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
+        </div>
+      </div>
+
+      <div class="works-slide">
+        <div class="works-big"><img src="{% static 'images/site_images/individual.png' %}" alt=""></div>
+        <div class="works-row">
+          <div class="works-small"><img src="{% static 'images/site_images/dostavka.png' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/vivoz_snega.png' %}" alt=""></div>
+        </div>
+      </div>
+
+      <div class="works-slide">
+        <div class="works-big"><img src="{% static 'images/site_images/zemlyanie_raboti.png' %}" alt=""></div>
+        <div class="works-row">
+          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Секция 7 "Наши отзывы" -->
+<section class="reviews-section-rw fade-up">
+  <button class="reviews-btn-rw" id="openModal-rw">Наши отзывы</button>
+</section>
+
+<!-- Модальное окно -->
+<!-- Модальное окно -->
+<div class="modal-rw" id="reviewsModal-rw" aria-hidden="true">
+  <div class="modal-content-rw" role="dialog" aria-modal="true">
+    <button class="close-rw" id="closeModal-rw" aria-label="Закрыть">×</button>
+    
+    <!-- Основной вид: заголовок и карусель -->
+    <div class="main-view-rw">
+      <h2 class="modal-title-rw">Отзывы</h2>
+      <div class="carousel-wrapper-rw">
+        <button class="carousel-arrow-rw carousel-arrow-prev-rw" aria-label="Предыдущие отзывы">
+          ‹
+        </button>
+        
+        <!-- Горизонтальная лента карточек -->
+        <div class="reviews-list-rw">
+          <article class="review-card-rw" data-full-text="Отличная компания! Всё привезли вовремя, качество песка на высоте. Буду обращаться ещё!">
+            <p class="review-name-rw">Иван Петров</p>
+            <p class="review-service-rw">Доставка песка</p>
+            <div class="review-text-box-rw">
+              <p class="review-text-rw">Отличная компания! Всё привезли вовремя, качество песка на высоте. Буду обращаться ещё!</p>
+            </div>
+          </article>
+
+          <article class="review-card-rw" data-full-text="Сделали быстро и аккуратно. Работа выполнена качественно, без задержек. Рекомендую!">
+            <p class="review-name-rw">Мария Иванова</p>
+            <p class="review-service-rw">Укладка дороги</p>
+            <div class="review-text-box-rw">
+              <p class="review-text-rw">Сделали быстро и аккуратно. Работа выполнена качественно, без задержек. Рекомендую!</p>
+            </div>
+          </article>
+
+          <article class="review-card-rw" data-full-text="Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему. Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему. Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему.Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему. Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему. Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему.Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему. Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему. Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста скролла, чтобы проверить, как он работает, если текста действительно много. Добавим ещё немного слов, чтобы точно был скролл, и посмотрим, как это выглядит на маленьких экранах. Это должно помочь увидеть проблему.">
+            <p class="review-name-rw">Алексей Смирнов</p>
+            <p class="review-service-rw">Вывоз мусора</p>
+            <div class="review-text-box-rw">
+              <p class="review-text-rw">Всё увезли в день заказа, супер удобно. Цены адекватные, обслуживание вежливое. Очень длинный текст для теста...</p>
+            </div>
+          </article>
+        </div>
+        
+        <button class="carousel-arrow-rw carousel-arrow-next-rw" aria-label="Следующие отзывы">
+          ›
+        </button>
+      </div>
+    </div>
+    
+    <!-- Вид полного отзыва: скрыт изначально -->
+    <div class="full-review-view-rw" style="display: none;">
+      <button class="back-arrow-rw" aria-label="Вернуться к отзывам">←</button>
+      <h2 class="modal-title-rw">Отзыв</h2>
+      <div class="full-review-content-rw">
+        <!-- Сюда вставится содержимое полной карточки -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="{% static 'js/lead_form.js' %}"></script>
+  <script src="{% static 'js/phone_mask.js' %}"></script>
+{% endblock %}

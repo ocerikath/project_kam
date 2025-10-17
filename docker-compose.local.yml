@@ -1,0 +1,36 @@
+volumes:
+  projeect_kam_local_postgres_data: {}
+  projeect_kam_local_postgres_data_backups: {}
+  
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: projeect_kam_local_django
+    container_name: projeect_kam_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    working_dir: /app
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+      - ./.envs/.production/.django
+    ports:
+      - '8000:8000'
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: projeect_kam_production_postgres
+    container_name: projeect_kam_local_postgres
+    volumes:
+      - projeect_kam_local_postgres_data:/var/lib/postgresql/data
+      - projeect_kam_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres

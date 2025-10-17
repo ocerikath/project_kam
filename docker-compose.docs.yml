@@ -1,0 +1,18 @@
+services:
+  docs:
+    image: projeect_kam_local_docs
+    container_name: projeect_kam_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.production/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./projeect_kam:/app/projeect_kam:z
+    ports:
+      - '9000:9000'
+    command: /start-docs
+    
