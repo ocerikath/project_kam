@@ -1,25 +1,43 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-  <section class="container">
-    <h1>Каталог</h1>
+<link rel="stylesheet" href="{% static 'css/catalog.css' %}">
+<section class="catalog container">
+  <h1 class="catalog__title">Каталог</h1>
 
-    <h2>Категории</h2>
-    <ul>
-      {% for category in categories %}
-        <li>{{ category.name }}</li>
-      {% empty %}
-        <li>Категории пока не добавлены</li>
-      {% endfor %}
-    </ul>
+  {% for category in categories %}
+    <div class="catalog__category">
+      <h2 class="catalog__category-title">{{ category.name }}</h2>
 
-    <h2>Товары</h2>
-    <ul>
-      {% for product in products %}
-        <li>{{ product.name }} — {{ product.price }} ₽</li>
-      {% empty %}
-        <li>Товары пока не добавлены</li>
-      {% endfor %}
-    </ul>
-  </section>
+      <div class="catalog__products">
+        {% for product in products %}
+          {% if product.category_id == category.id %}
+            <div class="product-card" data-category="{{ product.category.name }}">
+              
+              <div class="product-card__image">
+                {% if product.image %}
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                  <img src="{% static 'images/site_images/no-image.jpg' %}" alt="Нет изображения">
+                {% endif %}
+              </div>
+
+              <div class="product-card__info">
+                <h3 class="product-card__name">{{ product.name }}</h3>
+                <p class="product-card__price">от {{ product.price }} ₽</p>
+              </div>
+
+              <a href="#" class="product-card__btn">Заказать</a>
+            </div>
+          {% endif %}
+        {% empty %}
+          <p class="empty-text">Нет товаров в этой категории</p>
+        {% endfor %}
+      </div>
+    </div>
+  {% empty %}
+    <p class="empty-text">Категории пока не добавлены</p>
+  {% endfor %}
+</section>
 {% endblock %}
