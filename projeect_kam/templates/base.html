@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/desktop.css' %}">
     <!-- swiper.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     {% block extra_css %}{% endblock %}
@@ -18,14 +19,47 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <body class="d-flex flex-column min-vh-100">
 
-    <header class="mobile-header">
-        <div class="container d-flex justify-content-between align-items-center header-inner">
+    <header class="site-header">
+
+        <!-- Десктопная шапка -->
+        <div class="container header-inner d-none d-lg-flex">
+            <!-- Логотип -->
+            <div class="header-left">
+                <a href="{% url 'home' %}" class="d-flex align-items-center text-decoration-none">
+                    <img class="menu__logo-img" src="{% static 'images/icons/logot.png' %}" alt="ПЕСОК1">
+                    <h1 class="logo__name m-0">ПЕСОК<br>ПЕРВЫЙ</h1>
+                </a>
+            </div>
+    
+            <!-- Навигация -->
+            <div class="header-center">
+                <nav class="desktop-nav">
+                    <a href="{% url 'home' %}">Главная</a>
+                    <a href="{% url 'pages:catalog' %}">Каталог</a>
+                    <a href="{% url 'pages:contact' %}">Контакты</a>
+                </nav>
+            </div>
+    
+            <!-- Правый блок -->
+            <div class="header-right">
+                <div class="menu-messengers">
+                    <a href="https://t.me/username" target="_blank">
+                        <img src="{% static 'images/icons/telegram.png' %}" alt="Telegram">
+                    </a>
+                    <a href="https://wa.me/79001234567" target="_blank">
+                        <img src="{% static 'images/icons/whatsapp.png' %}" alt="WhatsApp">
+                    </a>
+                </div>
+                <a href="tel:+79001234567" class="phone-number">+7 (900) 123-45-67</a>
+            </div>
+        </div>
+    
+        <!-- Мобильная шапка -->
+        <div class="container d-flex d-lg-none justify-content-between align-items-center mobile-block">
             <!-- Логотип -->
             <a href="{% url 'home' %}" class="d-flex align-items-center text-decoration-none">
-                <img class="menu__logo-img me-2" src="{% static 'images/icons/logot.png' %}" alt="ПЕСОК1" height="57">
-                <h1 class="logo__name m-0 fs-5">
-                    ПЕСОК<br>ПЕРВЫЙ
-                </h1>
+                <img class="menu__logo-img" src="{% static 'images/icons/logot.png' %}" alt="ПЕСОК1" height="57">
+                <h1 class="logo__name m-0 fs-5">ПЕСОК<br>ПЕРВЫЙ</h1>
             </a>
     
             <!-- Телефон + бургер -->
@@ -38,20 +72,18 @@
                         <rect class="line bottom" y="20" width="32" height="3" rx="1.5" fill="#4A4440"/>
                     </svg>
                 </button>
+                
             </div>
         </div>
     
-        <!-- Контейнер мобильного меню -->
-        <div class="mobile-menu-wrapper" id="mobileMenuWrapper">
+        <!-- Мобильное меню -->
+        <div class="mobile-menu-wrapper d-lg-none" id="mobileMenuWrapper">
             <div id="navbarMobile" class="mobile-menu">
                 <ul class="nav flex-column text-center">
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Главная</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'pages:catalog' %}">Каталог</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'pages:contact' %}">Контакты</a></li>
                 </ul>
-                
-    
-                <!-- Мессенджеры -->
                 <div class="menu-messengers d-flex justify-content-center gap-5">
                     <a href="https://t.me/username" target="_blank">
                         <img src="{% static 'images/icons/telegram.png' %}" alt="Telegram" class="messenger-icon">
@@ -62,7 +94,10 @@
                 </div>
             </div>
         </div>
+    
     </header>
+    
+    
     
     
     

@@ -1,0 +1,103 @@
+.site-header {
+    background-color: var(--bg-main);
+    border-bottom: 1px solid var(--text-muted);
+    width: 100%;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+/* Логотип */
+.header-left .menu__logo-img {
+    height: 70px;
+}
+
+.header-left .logo__name {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    line-height: 1.1;
+    margin-left: 10px;
+}
+
+/* Навигация (центр) */
+.header-center .desktop-nav {
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* увеличенный gap между ссылками */
+}
+
+.header-center .desktop-nav a {
+    text-decoration: none;
+    font-size: clamp(1.4rem, 2vw, 1.6rem);
+    font-weight: 600;
+    color: var(--text-heading);
+    transition: color 0.3s;
+}
+
+.header-center .desktop-nav a:hover {
+    color: var(--text-muted);
+}
+
+/* Правый блок */
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: -50px;
+    margin-right: 25px;
+}
+
+.header-right .menu-messengers {
+    display: flex;
+    gap: 30px;
+}
+
+.header-right .menu-messengers img {
+    width: 36px;
+    height: 36px;
+}
+
+.header-right .phone-number {
+    font-size: clamp(1.2rem, 1.3vw, 1.4rem);
+    text-decoration: none;
+    color: var(--text-heading);
+}
+
+.header-right .phone-number:hover {
+    color: var(--btn-bg);
+}
+
+/* Мобильная версия сохраняется */
+.mobile-block .phone-number {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+
+@media (min-width: 992px) {
+    /* Заголовок */
+    .heading__title-first {
+        text-align: center;
+        white-space: normal; /* отменяем переносы, если были */
+    }
+  
+    /* Первая строка "Доставка нерудных материалов" */
+    .heading__title-first br:first-of-type {
+        display: none; /* убираем перенос между "Доставка" и "нерудных материалов" */
+    }
+  
+    .heading__span {
+        display: block;
+        margin-top: 10px; /* отступ между ключевыми словами */
+    }
+  
+    /* Параграф */
+    .heading__text {
+        margin-top: 15px;
+    }
+  }
+  

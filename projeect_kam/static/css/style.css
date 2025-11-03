@@ -76,7 +76,7 @@ header {
 
 .mobile-menu-wrapper {
     position: fixed;
-    top: 90px; /* ниже шапки */
+    
     left: 0;
     width: 100%;
     height: 0;
@@ -253,8 +253,10 @@ main {
 }
 
 .burger-btn {
+    position: relative;
     margin-top: clamp(0.3vh, 0.7vw, 1vh);
     padding: clamp(1.8vh, 4vw, 3vh) !important;
+    z-index: 100;
 }
 @media (min-width:355px) {
     .mobile-menu-wrapper.active {
