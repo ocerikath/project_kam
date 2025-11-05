@@ -70,7 +70,7 @@ const slides_whyus = gsap.utils.toArray(".slide-whyus2");
 const section = document.querySelector(".why-us2");
 let animationCompleted = false;
 
-// Создаем контейнер для статической сетки
+// Создаем контейнер для статической сетки (работает везде)
 const staticContainer = document.createElement('div');
 staticContainer.className = 'why-us2-static';
 staticContainer.style.display = 'none';
@@ -87,52 +87,15 @@ slides_whyus.forEach((slide) => {
   staticContainer.appendChild(clone);
 });
 
-// Начальное состояние карточек
-gsap.set(slides_whyus, {
-  autoAlpha: 0,
-  y: "-120%",
-  scale: 0.9,
-  z: -600,
-  filter: "blur(8px)"
-});
-
-// Таймлайн анимации
-const timeline_whyus = gsap.timeline({ 
-  defaults: { ease: "power2.inOut" }
-});
-
-slides_whyus.forEach((card) => {
-  timeline_whyus.to(card, { 
-    autoAlpha: 1, 
-    y: "0%", 
-    scale: 1, 
-    z: 0, 
-    filter: "blur(0px)", 
-    duration: 0.6 
-  });
-  timeline_whyus.to({}, { duration: 0.25 });
-  timeline_whyus.to(card, { 
-    autoAlpha: 0, 
-    y: "120%", 
-    scale: 0.9, 
-    z: -600, 
-    filter: "blur(8px)", 
-    duration: 0.6 
-  });
-  timeline_whyus.add(() => {
-    slides_whyus.forEach(c => c.classList.remove("is-active"));
-    card.classList.add("is-active");
-  }, "-=0.9");
-});
-
-// Функция для завершения анимации
+// --- Функция завершения анимации (универсальная) ---
 function completeAnimation(instant = false) {
   if (animationCompleted) return;
   animationCompleted = true;
-  
+
   document.body.style.overflow = '';
-  timeline_whyus.kill();
-  st_whyus.kill();
+
+  if (timeline_whyus) timeline_whyus.kill();
+  if (st_whyus) st_whyus.kill();
 
   const pinSpacer = document.querySelector('.pin-spacer');
   if (pinSpacer) pinSpacer.remove();
@@ -145,17 +108,14 @@ function completeAnimation(instant = false) {
   staticContainer.style.display = 'grid';
 
   if (instant) {
-    // показываем сетку сразу
     gsap.set(staticContainer, { autoAlpha: 1 });
   } else {
-    // обычная плавная анимация появления
-    gsap.fromTo(staticContainer, 
+    gsap.fromTo(staticContainer,
       { autoAlpha: 0 },
       { autoAlpha: 1, duration: 0.8, ease: "power2.out" }
     );
   }
 
-  // возвращение скролла назад — только если не instant
   if (!instant) {
     gsap.to(window, {
       duration: 0.25,
@@ -167,70 +127,120 @@ function completeAnimation(instant = false) {
   setTimeout(() => ScrollTrigger.refresh(), 200);
 }
 
-document.getElementById('scrollToLead').addEventListener('click', (e) => {
-  e.preventDefault();
+// --- Универсальный обработчик кнопки ---
+const scrollToLeadBtn = document.getElementById('scrollToLead');
+if (scrollToLeadBtn) {
+  scrollToLeadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
 
-  // завершаем анимацию секции моментально
-  completeAnimation(true);
+    completeAnimation(true);
 
-  // после этого — плавный скролл к форме
-  setTimeout(() => {
-    gsap.to(window, {
-      duration: 0.6,
-      scrollTo: "#lead-section",
-      ease: "power2.out"
+    setTimeout(() => {
+      gsap.to(window, {
+        duration: 0.6,
+        scrollTo: "#lead-section",
+        ease: "power2.out"
+      });
+    }, 100);
+  });
+}
+
+// --- Ветка для мобильных устройств ---
+if (window.innerWidth < 992) {
+  // Начальное состояние карточек
+  gsap.set(slides_whyus, {
+    autoAlpha: 0,
+    y: "-120%",
+    scale: 0.9,
+    z: -600,
+    filter: "blur(8px)"
+  });
+
+  // Таймлайн анимации
+  var timeline_whyus = gsap.timeline({
+    defaults: { ease: "power2.inOut" }
+  });
+
+  slides_whyus.forEach((card) => {
+    timeline_whyus.to(card, {
+      autoAlpha: 1,
+      y: "0%",
+      scale: 1,
+      z: 0,
+      filter: "blur(0px)",
+      duration: 0.6
     });
-  }, 100); // небольшая задержка, чтобы DOM обновился
-});
+    timeline_whyus.to({}, { duration: 0.25 });
+    timeline_whyus.to(card, {
+      autoAlpha: 0,
+      y: "120%",
+      scale: 0.9,
+      z: -600,
+      filter: "blur(8px)",
+      duration: 0.6
+    });
+    timeline_whyus.add(() => {
+      slides_whyus.forEach(c => c.classList.remove("is-active"));
+      card.classList.add("is-active");
+    }, "-=0.9");
+  });
 
-
-// ScrollTrigger
-const st_whyus = ScrollTrigger.create({
-  animation: timeline_whyus,
-  trigger: ".why-us2",
-  start: "top top",
-  end: `+=${slides_whyus.length * window.innerHeight * 0.9}`,
-  scrub: 1,
-  pin: true,
-  anticipatePin: 1,
-  onEnter: () => {
-    document.body.style.overflow = 'hidden';
-  },
-  onUpdate: (self) => {
-    if (self.progress > 0.85 && !animationCompleted) {
-      completeAnimation();
+  // ScrollTrigger
+  var st_whyus = ScrollTrigger.create({
+    animation: timeline_whyus,
+    trigger: ".why-us2",
+    start: "top top",
+    end: `+=${slides_whyus.length * window.innerHeight * 0.9}`,
+    scrub: 1,
+    pin: true,
+    anticipatePin: 1,
+    onEnter: () => {
+      document.body.style.overflow = 'hidden';
+    },
+    onUpdate: (self) => {
+      if (self.progress > 0.85 && !animationCompleted) {
+        completeAnimation();
+      }
+    },
+    onLeave: () => {
+      if (!animationCompleted) {
+        completeAnimation();
+      }
+      document.body.style.overflow = '';
     }
-  },
-  onLeave: () => {
+  });
+
+  // Обработчик быстрого скролла
+  let fastScrollTimeout;
+  window.addEventListener('wheel', () => {
+    if (animationCompleted) return;
+    clearTimeout(fastScrollTimeout);
+    fastScrollTimeout = setTimeout(() => {
+      if (st_whyus && st_whyus.progress > 1) {
+        completeAnimation();
+      }
+    }, 100);
+  }, { passive: true });
+
+  // Пересчёт при ресайзе
+  window.addEventListener("resize", () => {
     if (!animationCompleted) {
-      completeAnimation();
+      ScrollTrigger.refresh();
     }
-    document.body.style.overflow = '';
+  });
+
+  // Учет "уменьшить анимацию"
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    completeAnimation();
   }
-});
 
-// Обработчик быстрого скролла
-let fastScrollTimeout;
-window.addEventListener('wheel', () => {
-  if (animationCompleted) return;
-  clearTimeout(fastScrollTimeout);
-  fastScrollTimeout = setTimeout(() => {
-    if (st_whyus && st_whyus.progress > 1) {
-      completeAnimation();
-    }
-  }, 100);
-}, { passive: true });
-
-// Пересчёт при ресайзе
-window.addEventListener("resize", () => {
-  if (!animationCompleted) {
-    ScrollTrigger.refresh();
-  }
-});
-
-// Учет "уменьшить анимацию"
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  completeAnimation();
+} else {
+  // --- Ветка для десктопа ---
+  // Просто показываем статичную версию
+  section.style.display = 'none';
+  staticContainer.style.display = 'grid';
+  staticContainer.style.opacity = '1';
+  gsap.set(staticContainer, { autoAlpha: 1 });
 }
 
 
@@ -349,22 +359,26 @@ const swiper = new Swiper('.services-slider .swiper', {
     el: '.swiper-pagination',
     clickable: true,
   },
-
 });
 
-// функция для паузы
-let servicesPauseTimeout;
-function pauseAutoplayServices() {
+let autoplayTimeout;
+
+function pauseAutoplayOnClick() {
+  // Останавливаем автоплей
   swiper.autoplay.stop();
-  clearTimeout(servicesPauseTimeout);
-  servicesPauseTimeout = setTimeout(() => {
+  
+  // Очищаем предыдущий таймер (если есть)
+  clearTimeout(autoplayTimeout);
+  
+  // Запускаем автоплей через 10 секунд
+  autoplayTimeout = setTimeout(() => {
     swiper.autoplay.start();
   }, 10000);
 }
 
-['touchstart', 'touchmove', 'mousedown'].forEach(evt => {
-  swiper.el.addEventListener(evt, pauseAutoplayServices, { passive: true });
-});
+// Вешаем обработчик только на клик/тап
+swiper.el.addEventListener('click', pauseAutoplayOnClick);
+swiper.el.addEventListener('touchstart', pauseAutoplayOnClick, { passive: true });
 
 
 
@@ -540,3 +554,91 @@ if (openBtn && modal && closeBtn && reviewsList && prevArrow && nextArrow && mai
 
 
 
+
+
+// Бесконечная карусель для секции "Наши работы"
+function initInfiniteCarousel() {
+  const track = document.querySelector('.works-track');
+  const slides = document.querySelectorAll('.works-slide');
+  
+  if (!track || slides.length === 0) return;
+  
+  // Рассчитываем общую ширину одного набора слайдов
+  let singleSetWidth = 0;
+  slides.forEach(slide => {
+    singleSetWidth += slide.offsetWidth + parseInt(getComputedStyle(track).gap);
+  });
+  
+  // Клонируем слайды столько раз, чтобы заполнить экран + запас
+  const viewportWidth = window.innerWidth;
+  const neededClones = Math.ceil(viewportWidth / singleSetWidth) + 2;
+  
+  for (let i = 0; i < neededClones; i++) {
+    slides.forEach(slide => {
+      const clone = slide.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+  }
+  
+  let animationId;
+  let position = 0;
+  const speed = 0.8; // пикселей за кадр
+  
+  function animate() {
+    position -= speed;
+    
+    // Сбрасываем позицию когда уехали на ширину оригинальных слайдов
+    if (Math.abs(position) >= singleSetWidth) {
+      position = 0;
+    }
+    
+    track.style.transform = `translate3d(${position}px, 0, 0)`;
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  // Запускаем анимацию
+  animate();
+  
+  // Пауза при наведении
+  track.addEventListener('mouseenter', () => {
+    cancelAnimationFrame(animationId);
+  });
+  
+  track.addEventListener('mouseleave', () => {
+    animationId = requestAnimationFrame(animate);
+  });
+  
+  // Переинициализация при ресайзе
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(animationId);
+    // Очищаем клоны
+    const allSlides = track.querySelectorAll('.works-slide');
+    const originalSlides = Array.from(allSlides).slice(0, slides.length);
+    track.innerHTML = '';
+    originalSlives.forEach(slide => track.appendChild(slide));
+    // Перезапускаем
+    setTimeout(initInfiniteCarousel, 100);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initInfiniteCarousel);
+
+
+// Обработчик для всех якорных ссылок
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+    
+    if (targetElement) {
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: targetElement
+      });
+    } else {
+      console.warn(`Элемент ${targetId} не найден`);
+    }
+  });
+});

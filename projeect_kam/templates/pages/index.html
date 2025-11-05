@@ -24,7 +24,7 @@
           </h1>
           <p class="heading__text fade-up">Доставка по региону. Гарантия качества</p>
         </div>
-        <a href="#lead-section" class="heading__link fade-up" id="scrollToLead">Оставить заявку</a>
+        <a href="#feedback" class="heading__link fade-up" id="scrollToLead">Оставить заявку</a>
       </div>
     </div>
 </section>
@@ -47,7 +47,7 @@
         <div class="slide-content">
           <h2>Доставка</h2>
           <p>Щебень, песок и другие нерудные материалы</p>
-          <a href="#" class="btn">Заказать услугу</a>
+          <a href="#feedback" class="btn">Заказать услугу</a>
         </div>
       </div>
 
@@ -64,7 +64,7 @@
         <div class="slide-content">
           <h2>Дорожные работы</h2>
           <p>Строительство и укладка дорог</p>
-          <a href="#" class="btn">Заказать услугу</a>
+          <a href="#feedback" class="btn">Заказать услугу</a>
         </div>
       </div>
 
@@ -81,7 +81,7 @@
         <div class="slide-content">
           <h2>Вывоз мусора</h2>
           <p>Быстро и удобно</p>
-          <a href="#" class="btn">Заказать услугу</a>
+          <a href="#feedback" class="btn">Заказать услугу</a>
         </div>
       </div>
 
@@ -98,7 +98,7 @@
         <div class="slide-content">
           <h2>Вывоз снега</h2>
           <p>Зимой — без проблем</p>
-          <a href="#" class="btn">Заказать услугу</a>
+          <a href="#feedback" class="btn">Заказать услугу</a>
         </div>
       </div>
 
@@ -115,7 +115,7 @@
         <div class="slide-content">
           <h2>Аренда техники</h2>
           <p>Экскаваторы и другая спецтехника</p>
-          <a href="#" class="btn">Заказать услугу</a>
+          <a href="#feedback" class="btn">Заказать услугу</a>
         </div>
       </div>
 
@@ -132,7 +132,7 @@
         <div class="slide-content">
           <h2>Земляные работы</h2>
           <p>Рытьё котлованов и другие землеройные работы</p>
-          <a href="#" class="btn">Заказать услугу</a>
+          <a href="#feedback" class="btn">Заказать услугу</a>
         </div>
       </div>
 
@@ -149,7 +149,7 @@
         <div class="slide-content">
           <h2>Индивидуальные заказы</h2>
           <p>Решения под ваши задачи</p>
-          <a href="#" class="btn">Заказать услугу</a>
+          <a href="#feedback" class="btn">Заказать услугу</a>
         </div>
       </div>
 
@@ -217,7 +217,7 @@
 <section class="catalog-section fade-up">
   <div class="catalog-header fade-up">
     <h2 class="catalog-title fade-up">Наш каталог</h2>
-    <a href="#" class="catalog-link fade-up">Все товары →</a>
+    <a href="{% url 'pages:catalog' %}" class="catalog-link fade-up">Все товары →</a>
   </div>
 
   <div class="catalog-categories fade-up">
@@ -241,7 +241,7 @@
           <span class="card-title">{{ product.name }}</span>
           <span class="card-price">от {{ product.price }}₽</span>
         </div>
-        <a href="#" class="slide-btn">Заказать</a>
+        <a href="#feedback" class="slide-btn">Заказать</a>
       </div>
     {% endfor %}
   </div>
@@ -336,10 +336,25 @@ function init() {
 </script>
 
 <!-- Секция 5 "Заявка / форма" -->
-<section class="form-bg fade-up" id="lead-section">
+<section class="feedback" id="feedback">
+  <div class="feedback__container">
+    <div class="feedback__text">
+      <h2 class="feedback__title">Свяжитесь с нами</h2>
+      <p class="feedback__desc">
+        Заполните форму, и наш менеджер свяжется с вами в ближайшее время.
+        Укажите удобное время для звонка и краткое описание вашего запроса.
+      </p>
+      <p class="feedback__extra">
+        Мы гарантируем конфиденциальность ваших данных и оперативную обработку обращений.
+        Обычно отвечаем в течение 30 минут в рабочее время.
+      </p>
+      <p class="feedback__important">
+        <strong>Важно:</strong> Для срочных вопросов рекомендуем звонить по телефону:
+        <a href="tel:+79991234567" class="feedback__phone">+7 (999) 123-45-67</a>
+      </p>
+    </div>
 
-  <!-- Табличка-за-формой -->
-  <div class="form-background fade-up"></div>
+    <!-- Табличка-за-формой -->
 
   <form id="leadForm" class="fade-up" method="post" novalidate>
     {% csrf_token %}
@@ -387,6 +402,7 @@ function init() {
     <!-- Кнопка отправки -->
     <button class="fade-up" type="submit" id="submitBtn" disabled>Отправить заявку</button>
   </form>
+  </div>
 </section>
 
 <!-- Модальное окно -->
@@ -395,15 +411,6 @@ function init() {
   <button id="modalClose">Закрыть</button>
 </div>
 
-<section class="contact-info-area fade-up">
-  <div class="contact-info-text fade-up">
-    <ul>
-      <li><p>Или свяжитесь с нами!</p></li>
-      <li><a href="tel:+79001234567" class="phone-number-info">+7 (900) 123-45-67</a></li>
-      <li><a href="mailto:pesokperviy@gmail.com" class="email-adress-info">pesokperviy@gmail.com</a> </li>
-    </ul>
-  </div>
-</section>
 
 <!-- Секция 6 "примеры наших работ"-->
 <section class="works-section fade-up">
@@ -412,53 +419,28 @@ function init() {
   <div class="works-slider fade-up">
     <div class="works-track fade-up">
 
-      <!-- Слайды (все одинаковые) -->
+      <!-- Слайды (только оригиналы, без дубликатов) -->
       <div class="works-slide">
-        <div class="works-big"><img src="{% static 'images/site_images/dorozniye_raboti.png' %}" alt=""></div>
+        <div class="works-big"><img src="{% static 'images/site_images/dorozniye_raboti.png' %}" alt="Дорожные работы"></div>
         <div class="works-row">
-          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
-          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt="Карьерные работы"></div>
+          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt="Самосвал"></div>
         </div>
       </div>
 
       <div class="works-slide">
-        <div class="works-big"><img src="{% static 'images/site_images/individual.png' %}" alt=""></div>
+        <div class="works-big"><img src="{% static 'images/site_images/individual.png' %}" alt="Индивидуальные работы"></div>
         <div class="works-row">
-          <div class="works-small"><img src="{% static 'images/site_images/dostavka.png' %}" alt=""></div>
-          <div class="works-small"><img src="{% static 'images/site_images/vivoz_snega.png' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/dostavka.png' %}" alt="Доставка"></div>
+          <div class="works-small"><img src="{% static 'images/site_images/vivoz_snega.png' %}" alt="Вывоз снега"></div>
         </div>
       </div>
 
       <div class="works-slide">
-        <div class="works-big"><img src="{% static 'images/site_images/zemlyanie_raboti.png' %}" alt=""></div>
+        <div class="works-big"><img src="{% static 'images/site_images/zemlyanie_raboti.png' %}" alt="Земляные работы"></div>
         <div class="works-row">
-          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
-          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
-        </div>
-      </div>
-
-      <!-- Дубликаты для бесконечной анимации -->
-      <div class="works-slide">
-        <div class="works-big"><img src="{% static 'images/site_images/dorozniye_raboti.png' %}" alt=""></div>
-        <div class="works-row">
-          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
-          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
-        </div>
-      </div>
-
-      <div class="works-slide">
-        <div class="works-big"><img src="{% static 'images/site_images/individual.png' %}" alt=""></div>
-        <div class="works-row">
-          <div class="works-small"><img src="{% static 'images/site_images/dostavka.png' %}" alt=""></div>
-          <div class="works-small"><img src="{% static 'images/site_images/vivoz_snega.png' %}" alt=""></div>
-        </div>
-      </div>
-
-      <div class="works-slide">
-        <div class="works-big"><img src="{% static 'images/site_images/zemlyanie_raboti.png' %}" alt=""></div>
-        <div class="works-row">
-          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt=""></div>
-          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt=""></div>
+          <div class="works-small"><img src="{% static 'images/site_images/karyer_test2.jpg' %}" alt="Карьерные работы"></div>
+          <div class="works-small"><img src="{% static 'images/site_images/kamaz-samosval.jpg' %}" alt="Самосвал"></div>
         </div>
       </div>
 

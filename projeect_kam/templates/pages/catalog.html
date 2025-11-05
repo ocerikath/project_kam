@@ -28,7 +28,7 @@
                 <p class="product-card__price">от {{ product.price }} ₽</p>
               </div>
 
-              <a href="#" class="product-card__btn">Заказать</a>
+              <a href="{% url 'home' %}#feedback" class="product-card__btn">Заказать</a>
             </div>
           {% endif %}
         {% empty %}

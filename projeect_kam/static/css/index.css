@@ -198,11 +198,6 @@
 
 
 
-
-
-
-
-
 /*Наши услуги */
 .services-slider {
   width: 100%;
@@ -281,11 +276,6 @@
   background-color: rgba(0, 0, 0, 0.3); /* затемнение: можно менять прозрачность */
   z-index: 1;
 }
-
-
-
-
-
 
 
 
@@ -672,8 +662,137 @@
 
 
 
-/* Секция 5 "Форма" */
+.feedback {
+  background-color: #EAE6DC;
+  color: #3E3E3E;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 5vw, 3rem);
+  width: 100%;
+}
 
+.feedback__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(2rem, 5vw, 4rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.feedback__text {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.feedback__title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+.feedback__desc,
+.feedback__extra {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.feedback__important {
+  background: rgba(62, 62, 62, 0.05);
+  padding: clamp(0.8rem, 2vw, 1rem);
+  border-left: 4px solid #8F735B;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  border-radius: 6px;
+}
+
+.feedback__phone {
+  display: block;
+  margin-top: 0.3em; /* небольшой отступ сверху для воздуха */
+  color: #8F735B;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.feedback__phone:hover {
+  text-decoration: underline;
+}
+
+.feedback__form {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feedback__form-placeholder {
+  width: 100%;
+  min-height: clamp(250px, 40vw, 400px);
+  background: #fff;
+  border: 2px dashed #CFC8BA;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #8F735B;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .feedback__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feedback__text,
+  .feedback__form {
+    flex: 1 1 100%;
+  }
+
+  .feedback__form-placeholder {
+    min-height: clamp(300px, 60vw, 400px);
+  }
+}
+
+
+.adv-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.8rem, 3vw, 1rem);
+  background-image: url("../images/site_images/individual.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: clamp(0.8rem, 2vw, 1rem);
+  padding: clamp(0.9rem, 3vw, 1.3rem);
+  overflow: hidden; /* чтобы overlay не выходил за границы */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.adv-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.adv-card:hover .overlay {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.adv-text {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+
+/* форма */
 #lead-section {
   position: relative;
   padding: clamp(2rem, 4vw, 3rem);
@@ -977,11 +1096,7 @@ textarea {
 .works-track {
   display: flex;
   gap: clamp(1rem, 2vw, 1.5rem);
-  animation: scroll 30s linear infinite;
-  /* Исправляем подёргивания */
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  /* Убрали анимацию из CSS - будем управлять через JS */
 }
 
 /* Слайды */
@@ -991,8 +1106,6 @@ textarea {
   flex-shrink: 0;
   width: clamp(280px, 50vw, 350px);
   gap: clamp(0.8rem, 1.5vw, 1rem);
-  /* Помогает сглаживанию */
-  transform: translateZ(0);
 }
 
 /* Картинки */
@@ -1026,22 +1139,10 @@ textarea {
   min-height: clamp(100px, 18vw, 130px);
 }
 
-/* === Анимация === */
-@keyframes scroll {
-  0% { 
-    transform: translate3d(0, 0, 0);
-  }
-  100% { 
-    transform: translate3d(calc(-100% - clamp(1rem, 2vw, 1.5rem)), 0, 0);
-  }
-}
-
 /* === Мобильные правки === */
 @media (max-width: 768px) {
   .works-track {
     gap: clamp(0.8rem, 2vw, 1.2rem);
-    /* ТА ЖЕ СКОРОСТЬ что и на десктопе! */
-    animation-duration: 10s;
   }
 
   .works-slide {
@@ -1067,8 +1168,6 @@ textarea {
 @media (max-width: 480px) {
   .works-track {
     gap: clamp(0.6rem, 2vw, 1rem);
-    /* Можно даже чуть быстрее для мобилок */
-    animation-duration: 7s;
   }
 
   .works-slide {
@@ -1087,20 +1186,8 @@ textarea {
   }
 }
 
-/* Дополнительные оптимизации для плавности */
-.works-slider {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-.works-track {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
 
 /* --- Секция 7 "Наши отзывы" --- */
-
 .reviews-section-rw{
   display:flex;justify-content:center;align-items:center;
   padding:clamp(1rem,3vw,2rem);
