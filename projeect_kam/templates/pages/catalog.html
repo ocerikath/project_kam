@@ -10,34 +10,147 @@
     <div class="catalog__category">
       <h2 class="catalog__category-title">{{ category.name }}</h2>
 
-      <div class="catalog__products">
-        {% for product in products %}
-          {% if product.category_id == category.id %}
-            <div class="product-card" data-category="{{ product.category.name }}">
-              
-              <div class="product-card__image">
-                {% if product.image %}
-                  <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                {% else %}
-                  <img src="{% static 'images/site_images/no-image.jpg' %}" alt="Нет изображения">
-                {% endif %}
-              </div>
+      <div class="slider-container">
+        <!-- Кнопка назад -->
+        <button class="slider-arrow slider-arrow--prev" aria-label="Предыдущие товары">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
 
-              <div class="product-card__info">
-                <h3 class="product-card__name">{{ product.name }}</h3>
-                <p class="product-card__price">от {{ product.price }} ₽</p>
-              </div>
+        <!-- Контейнер слайдера -->
+        <div class="catalog__products">
+          {% for product in products %}
+            {% if product.category_id == category.id %}
+              <div class="product-card" data-category="{{ product.category.name }}">
+                
+                <div class="product-card__image">
+                  {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                  {% else %}
+                    <img src="{% static 'images/site_images/no-image.jpg' %}" alt="Нет изображения">
+                  {% endif %}
+                </div>
 
-              <a href="{% url 'home' %}#feedback" class="product-card__btn">Заказать</a>
-            </div>
-          {% endif %}
-        {% empty %}
-          <p class="empty-text">Нет товаров в этой категории</p>
-        {% endfor %}
+                <div class="product-card__info">
+                  <h3 class="product-card__name">{{ product.name }}</h3>
+                  <p class="product-card__price">от {{ product.price }} ₽</p>
+                </div>
+
+                <a href="{% url 'home' %}#feedback" class="product-card__btn">Заказать</a>
+              </div>
+            {% endif %}
+          {% empty %}
+            <p class="empty-text">Нет товаров в этой категории</p>
+          {% endfor %}
+        </div>
+
+        <!-- Кнопка вперед -->
+        <button class="slider-arrow slider-arrow--next" aria-label="Следующие товары">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   {% empty %}
     <p class="empty-text">Категории пока не добавлены</p>
   {% endfor %}
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Находим все контейнеры слайдеров
+  const sliderContainers = document.querySelectorAll('.slider-container');
+  
+  sliderContainers.forEach(container => {
+    const slider = container.querySelector('.catalog__products');
+    const prevBtn = container.querySelector('.slider-arrow--prev');
+    const nextBtn = container.querySelector('.slider-arrow--next');
+    
+    // Рассчитываем ширину прокрутки (2 карточки)
+    const scrollAmount = () => {
+      const card = slider.querySelector('.product-card');
+      if (!card) return slider.clientWidth * 0.8;
+      return card.offsetWidth * 2 + parseInt(getComputedStyle(slider).gap) * 2;
+    };
+    
+    // Кнопка "вперед"
+    nextBtn.addEventListener('click', () => {
+      slider.scrollBy({
+        left: scrollAmount(),
+        behavior: 'smooth'
+      });
+    });
+    
+    // Кнопка "назад"
+    prevBtn.addEventListener('click', () => {
+      slider.scrollBy({
+        left: -scrollAmount(),
+        behavior: 'smooth'
+      });
+    });
+    
+    // Показываем/скрываем стрелки в зависимости от позиции скролла
+    const updateArrows = () => {
+      const scrollLeft = slider.scrollLeft;
+      const scrollWidth = slider.scrollWidth;
+      const clientWidth = slider.clientWidth;
+      
+      // Показываем/скрываем кнопку "назад"
+      if (scrollLeft <= 10) {
+        prevBtn.classList.add('slider-arrow--hidden');
+      } else {
+        prevBtn.classList.remove('slider-arrow--hidden');
+      }
+      
+      // Показываем/скрываем кнопку "вперед"
+      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+        nextBtn.classList.add('slider-arrow--hidden');
+      } else {
+        nextBtn.classList.remove('slider-arrow--hidden');
+      }
+    };
+    
+    // Обновляем стрелки при скролле
+    slider.addEventListener('scroll', updateArrows);
+    
+    // Инициализируем видимость стрелок
+    updateArrows();
+    
+    // Также обновляем при изменении размера окна
+    window.addEventListener('resize', updateArrows);
+    
+    // Сохраняем функциональность перетаскивания мышью (опционально)
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  });
+});
+</script>
 {% endblock %}
